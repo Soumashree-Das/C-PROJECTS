@@ -13,20 +13,47 @@ i have created a vector of pairs having numbers mapping to 0,1,2 . now i will ge
 using namespace std;
 
 vector<string> choices = {"rock","paper","scissors"};
+/** 
+ * @brief Determines the outcome of a Rock-Paper-Scissors game round.
+ *
+ * This function implements the standard Rock-Paper-Scissors logic using modular arithmetic
+ * to handle the cyclical relationship between choices:
+ * - Each choice is represented as an integer index: 0 for Rock, 1 for Paper, 2 for Scissors.
+ * - The user and computer each select one of these choices.
+ * - The outcome is determined as follows:
+ *   - If both choices are the same, the result is a draw.
+ *   - Each choice i loses to (i+1) % 3 (e.g., Rock loses to Paper).
+ *   - Each choice i wins against (i-1+3) % 3 (e.g., Rock beats Scissors).
+ *
+ * The function prints the computer's choice and the result ("You win", "You lost", or "Draw!").
+ *
+ * @param userchoice The user's choice as a 1-based integer (1=Rock, 2=Paper, 3=Scissors).
+ *                   The function internally converts this to a 0-based index.
+ */
 
 void rock_paper_scissors(int userchoice)
 {
     int computerChoice = rand() % choices.size();
-    int uC=userchoice-1;
+    userchoice=userchoice-1;
     cout<<"computer chose:"<<choices[computerChoice];
-    if(computerChoice==uC){
-        cout<<"draw!\n";
-    }else if((uC-computerChoice+3)%3==1){
-        cout<<"You win"<<endl;
-    }else{
-        cout<<"You lost";
-    }
+        if(computerChoice==(userchoice+1)%choices.size())
+        {
+            cout<<"you lost.";
+            // break;
+        }
+        else if(computerChoice==(userchoice-1+3)%3)
+        {
+            cout<<"you win.";
+            // break;
+        }
+        else
+        {
+            cout<<"draw!";
+            // break;
+        }
 }
+
+
 
 int main() {
     srand(time(0));
